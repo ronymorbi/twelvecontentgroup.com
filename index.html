@@ -542,94 +542,90 @@
             border: none;
         }
 
-        /* Minimal Playlist Navigation */
+        /* MODIFIED PLAYLIST NAVIGATION STYLES */
         .playlist-navigation {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-top: 8px;
+            /* Justify content to keep buttons at edges, centering title/status */
+            justify-content: space-between; 
+            margin-top: 15px; 
             margin-bottom: 0;
-            padding: 0;
-            gap: 16px;
+            padding: 0 5px; 
+            gap: 15px; 
+            height: 40px;
+            width: 100%; 
         }
 
         .playlist-nav-btn {
-            background: transparent;
-            border: none;
-            border-bottom: 1.5px solid rgba(156, 232, 255, 0.7);
-            color: rgba(212, 242, 255, 0.7);
-            width: 33px;
-            height: 33px;
-            border-radius: 50%;
-            font-size: 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            /* Fixed width for both buttons */
+            width: 110px; 
+            padding: 7px 0; 
+            border-radius: 20px; 
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            position: relative;
+            justify-content: center; 
+            white-space: nowrap;
+            letter-spacing: 0.05em;
         }
 
         .playlist-nav-btn:hover:not(:disabled) {
-            color: #00d4ff;
-            background: rgba(0, 212, 255, 0.1);
-            border-bottom-color: #00d4ff;
-            transform: scale(1.1);
+            color: #0a0a0a;
+            background: #00d4ff;
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
 
         .playlist-nav-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.5;
             cursor: not-allowed;
-            border-bottom-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            transform: none; 
+        }
+        
+        /* Inner spans for arrow spacing and text layout */
+        .playlist-nav-btn span {
+            display: flex;
+            align-items: center;
+            gap: 5px; 
+        }
+        
+        .playlist-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; 
+            text-align: center;
+            white-space: nowrap;
+            min-width: 100px; 
         }
 
         #current-playlist-title {
             font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+            display: block;
+        }
+        
+        /* Style for the video count status (made smaller) */
+        #current-video-status {
+            font-size: 12px; 
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0;
-            text-align: center;
-            white-space: nowrap;
-            min-width: 0;
-            letter-spacing: -0.01em;
+            color: rgba(255, 255, 255, 0.7);
         }
+        /* END MODIFIED PLAYLIST NAVIGATION STYLES */
 
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .playlist-navigation {
-                gap: 14px;
-                margin-top: 10px;
-            }
-
-            .playlist-nav-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 15px;
-            }
-
-            #current-playlist-title {
-                font-size: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .playlist-navigation {
-                gap: 12px;
-                margin-top: 8px;
-            }
-
-            .playlist-nav-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-
-            #current-playlist-title {
-                font-size: 14px;
-            }
-        }
 
         /* Portfolio Carousel Styles */
         .portfolio-carousel-section {
@@ -1432,22 +1428,24 @@
                 padding: 60px 20px;
             }
 
-            /* In your mobile media query section, replace the playlist controls CSS with: */
+            /* MODIFIED: Mobile playlist control tweaks */
             .playlist-navigation {
-                padding: 0 5px;
-                margin-top: 12px;
+                gap: 10px;
+                margin-top: 10px;
+                padding: 0 10px;
             }
-
+            
             .playlist-nav-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
+                width: 100px;
+                padding: 6px 0;
+                font-size: 13px;
             }
-
-            #current-playlist-title {
-                font-size: 14px;
-                margin: 0 10px;
+            
+            .playlist-status {
+                font-size: 13px;
+                min-width: 100px;
             }
+            /* END MODIFIED: Mobile playlist control tweaks */
 
             .portfolio-carousel-section {
                 margin-top: 60px;
@@ -1550,6 +1548,18 @@
                 width: 40px;
                 height: 40px;
                 font-size: 18px;
+            }
+
+            .carousel-nav.prev {
+                left: 5px;
+            }
+
+            .carousel-nav.next {
+                right: 5px;
+            }
+
+            .carousel-wrapper {
+                margin: 0 30px;
             }
 
             .contact {
@@ -1856,11 +1866,23 @@
                 <div class="video-wrapper">
                     <div id="youtube-player"></div>
                 </div>
+                <!-- MODIFIED PLAYLIST NAVIGATION BLOCK -->
                 <div class="playlist-navigation">
-                    <button id="prev-video" class="playlist-nav-btn" disabled>‹</button>
-                    <h4 id="current-playlist-title">Showreel</h4>
-                    <button id="next-video" class="playlist-nav-btn" disabled>›</button>
+                    <button id="prev-video" class="playlist-nav-btn">
+                        <!-- Used the arrow you requested -->
+                        <span>◃ Previous</span>
+                    </button>
+                    <div class="playlist-status">
+                        <h4 id="current-playlist-title">Showreel</h4>
+                        <!-- New element for video count -->
+                        <div id="current-video-status">1 of 1 Video</div> 
+                    </div>
+                    <button id="next-video" class="playlist-nav-btn">
+                        <!-- Used the arrow you requested -->
+                        <span>Next ▹</span>
+                    </button>
                 </div>
+                <!-- END MODIFIED PLAYLIST NAVIGATION BLOCK -->
             </div>
             <!-- Portfolio Carousel -->
             <div class="portfolio-carousel-section">
@@ -2100,7 +2122,7 @@
                 </a>
                 <a href="https://www.instagram.com/twelvecontentgroup" class="social-link" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                 </a>
                 <a href="https://www.linkedin.com/in/ronymorbi" class="social-link" target="_blank" rel="noopener noreferrer">
@@ -2114,6 +2136,9 @@
     </footer>
 
     <script>
+        // Store a reference to the PortfolioCarousel instance globally so the YouTube player logic can access it.
+        let portfolioCarousel = null;
+
         // Loading screen
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2141,7 +2166,7 @@
             });
         }
 
-        // Mobile menu functionality
+        // Mobile menu functionality (kept as-is)
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
 
@@ -2150,7 +2175,6 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking on links
         document.querySelectorAll('.mobile-menu-items a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuToggle.classList.remove('active');
@@ -2158,7 +2182,7 @@
             });
         });
 
-        // Home button functionality
+        // Home button functionality (kept as-is)
         document.getElementById('homeBtn').addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({
@@ -2167,7 +2191,7 @@
             });
         });
 
-        // Back to top button functionality
+        // Back to top button functionality (kept as-is)
         const backToTopBtn = document.getElementById('backToTop');
 
         window.addEventListener('scroll', () => {
@@ -2175,7 +2199,6 @@
             const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
             scrollProgress.style.width = scrollPercent + '%';
             
-            // Show/hide back to top button
             if (window.scrollY > 300) {
                 backToTopBtn.classList.add('visible');
             } else {
@@ -2183,7 +2206,6 @@
             }
         });
 
-        // Back to top click handler
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -2191,7 +2213,7 @@
             });
         });
 
-        // Smooth scrolling
+        // Smooth scrolling (kept as-is)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2205,7 +2227,7 @@
             });
         });
 
-        // Intersection Observer for animations
+        // Intersection Observer for animations (kept as-is)
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -2220,7 +2242,6 @@
             });
         }, observerOptions);
 
-        // Observe various elements for fade-in animation
         document.querySelectorAll('.service-card, .testimonial-card, .logo-item, .about-content, .video-container').forEach((el, index) => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(50px)';
@@ -2229,8 +2250,7 @@
             observer.observe(el);
         });
 
-
-        // Form submission with AJAX to prevent page redirect
+        // Form submission (kept as-is)
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2239,12 +2259,10 @@
             const successMessage = document.getElementById('successMessage');
             const originalText = submitBtn.textContent;
             
-            // Update button state
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
             try {
-                // Submit form data to Formspree
                 const response = await fetch(form.action, {
                     method: 'POST',
                     body: new FormData(form),
@@ -2254,12 +2272,10 @@
                 });
                 
                 if (response.ok) {
-                    // Success - show message and reset form
                     successMessage.classList.add('show');
                     form.reset();
                     submitBtn.textContent = 'Message Sent!';
                     
-                    // Reset button after 5 seconds
                     setTimeout(() => {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
@@ -2270,18 +2286,16 @@
                 }
                 
             } catch (error) {
-                // Error handling
                 submitBtn.textContent = 'Error - Try Again';
                 submitBtn.disabled = false;
                 
-                // Reset button after 3 seconds
                 setTimeout(() => {
                     submitBtn.textContent = originalText;
                 }, 3000);
             }
         });
 
-        // Parallax effect for logo elements
+        // Parallax effect (kept as-is)
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallax = scrolled * 0.3;
@@ -2305,6 +2319,8 @@
                 this.currentIndex = 0;
                 this.itemsToShow = this.getItemsToShow();
                 this.maxIndex = this.items.length - this.itemsToShow;
+                this.totalCategories = this.items.length;
+                this.currentCategoryIndex = 0; // Initialize current category index to Showreel (index 0)
                 
                 this.init();
                 this.createDots();
@@ -2321,8 +2337,9 @@
             }
             
             init() {
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                // Modified carousel controls for looping
+                this.prevBtn.addEventListener('click', () => this.prevSlide(true));
+                this.nextBtn.addEventListener('click', () => this.nextSlide(true));
             }
             
             createDots() {
@@ -2338,13 +2355,17 @@
             }
             
             addVideoClickHandlers() {
-                this.items.forEach(item => {
+                this.items.forEach((item, index) => {
                     const link = item.querySelector('a');
+                    link.setAttribute('data-index', index);
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         const videoUrl = link.getAttribute('data-video-url');
                         const playlistTitle = item.querySelector('h4').textContent;
                         
+                        // Set the current category index when clicked from the carousel
+                        this.currentCategoryIndex = index;
+
                         loadYouTubePlaylist(videoUrl, playlistTitle);
                         
                         document.querySelector('.video-container').scrollIntoView({
@@ -2353,6 +2374,34 @@
                         });
                     });
                 });
+            }
+
+            // Public method to load a specific category index
+            loadCategoryByIndex(index) {
+                // Handle category index looping (0 to N-1)
+                this.currentCategoryIndex = (index % this.totalCategories + this.totalCategories) % this.totalCategories; 
+
+                const item = this.items[this.currentCategoryIndex];
+                if (item) {
+                    const link = item.querySelector('a');
+                    const videoUrl = link.getAttribute('data-video-url');
+                    const playlistTitle = item.querySelector('h4').textContent;
+                    
+                    loadYouTubePlaylist(videoUrl, playlistTitle);
+
+                    // Move the carousel to show the active item (handle wrapping)
+                    let newIndex = this.currentCategoryIndex;
+                    if (newIndex > this.maxIndex) {
+                        newIndex = this.maxIndex;
+                    }
+                    this.currentIndex = newIndex;
+                    this.updateCarousel();
+                    
+                    document.querySelector('.video-container').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
             }
             
             updateCarousel() {
@@ -2364,23 +2413,30 @@
                 document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
                     dot.classList.toggle('active', index === this.currentIndex);
                 });
-                
-                this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.5' : '1';
-                this.nextBtn.style.opacity = this.currentIndex >= this.maxIndex ? '0.5' : '1';
             }
             
-            nextSlide() {
-                if (this.currentIndex < this.maxIndex) {
-                    this.currentIndex++;
-                    this.updateCarousel();
+            // Modified nextSlide for looping
+            nextSlide(isUserClick = false) {
+                if (isUserClick) {
+                    this.currentIndex = (this.currentIndex + 1) % (this.maxIndex + 1);
+                } else {
+                    if (this.currentIndex < this.maxIndex) {
+                        this.currentIndex++;
+                    }
                 }
+                this.updateCarousel();
             }
             
-            prevSlide() {
-                if (this.currentIndex > 0) {
-                    this.currentIndex--;
-                    this.updateCarousel();
+            // Modified prevSlide for looping
+            prevSlide(isUserClick = false) {
+                if (isUserClick) {
+                    this.currentIndex = (this.currentIndex - 1 + (this.maxIndex + 1)) % (this.maxIndex + 1);
+                } else {
+                    if (this.currentIndex > 0) {
+                        this.currentIndex--;
+                    }
                 }
+                this.updateCarousel();
             }
             
             goToSlide(index) {
@@ -2402,9 +2458,9 @@
 
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize carousel
             if (document.getElementById('carouselTrack')) {
-                new PortfolioCarousel();
+                // Assign instance to global variable
+                portfolioCarousel = new PortfolioCarousel(); 
             }
         });
 
@@ -2412,14 +2468,13 @@
         let youtubePlayer = null;
         let currentPlaylist = null;
         let currentPlaylistTitle = 'Showreel';
-        let isLoading = false; // Prevent multiple rapid clicks
+        let isLoading = false; 
 
-        // This function is called automatically by the YouTube API script
         function onYouTubeIframeAPIReady() {
             youtubePlayer = new YT.Player('youtube-player', {
                 height: '100%',
                 width: '100%',
-                videoId: 'pOU3ZVIANVI', // Default showreel video
+                videoId: 'pOU3ZVIANVI', 
                 playerVars: {
                     'rel': 0,
                     'modestbranding': 1,
@@ -2435,18 +2490,18 @@
         function onPlayerReady(event) {
             updatePlaylistInfo();
             setupNavigationButtons();
-            isLoading = false; // Player is ready
+            isLoading = false; 
         }
 
         function onPlayerStateChange(event) {
-            // Reset loading state when video starts playing
             if (event.data === YT.PlayerState.PLAYING) {
                 isLoading = false;
                 setTimeout(updatePlaylistInfo, 100);
             }
-            // Also reset on other stable states
             else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
                 isLoading = false;
+                // Important: Update info immediately when a video ends to check if it's the last video
+                setTimeout(updatePlaylistInfo, 100); 
             }
         }
 
@@ -2456,24 +2511,17 @@
                 return;
             }
             
-            // Set loading state to prevent rapid clicks
             isLoading = true;
-            
-            // Update title immediately
             currentPlaylistTitle = playlistTitle;
             updatePlaylistTitle();
-            
-            console.log('Loading:', playlistTitle, 'URL:', videoUrl);
             
             const playlistMatch = videoUrl.match(/[?&]list=([^&]+)/);
             if (playlistMatch) {
                 const playlistId = playlistMatch[1];
                 currentPlaylist = playlistId;
                 
-                // Clear any existing playlist first
                 youtubePlayer.stopVideo();
                 
-                // Small delay to ensure stop command is processed
                 setTimeout(() => {
                     youtubePlayer.loadPlaylist({
                         list: playlistId,
@@ -2488,10 +2536,8 @@
                     const videoId = videoMatch[1];
                     currentPlaylist = null;
                     
-                    // Clear any existing playlist first
                     youtubePlayer.stopVideo();
                     
-                    // Small delay to ensure stop command is processed
                     setTimeout(() => {
                         youtubePlayer.loadVideoById(videoId);
                     }, 100);
@@ -2515,53 +2561,118 @@
             const prevBtn = document.getElementById('prev-video');
             const nextBtn = document.getElementById('next-video');
             
-            if (prevBtn && !prevBtn.hasAttribute('data-listener-added')) {
-                prevBtn.addEventListener('click', () => {
-                    if (youtubePlayer && youtubePlayer.previousVideo && !isLoading) {
-                        youtubePlayer.previousVideo();
+            // Function to handle video navigation logic (including inter-playlist looping)
+            const handleVideoNavigation = (isNext) => {
+                if (!youtubePlayer || isLoading || !portfolioCarousel) return;
+
+                // Check if current video is a single video (like Showreel)
+                const isSingleVideo = currentPlaylist === null;
+                
+                if (isSingleVideo) {
+                    // PROBLEM 1 FIX: If it's a single video, clicking next/previous MUST loop categories
+                    const newIndex = isNext 
+                        ? portfolioCarousel.currentCategoryIndex + 1 
+                        : portfolioCarousel.currentCategoryIndex - 1;
+                    
+                    portfolioCarousel.loadCategoryByIndex(newIndex);
+                    return;
+
+                } else {
+                    // Logic for multi-video playlists
+                    try {
+                        const playlistIndex = youtubePlayer.getPlaylistIndex();
+                        const totalVideos = youtubePlayer.getPlaylist().length;
+
+                        if (isNext) {
+                            if (playlistIndex === totalVideos - 1) {
+                                // Last video of playlist, loop to next category
+                                portfolioCarousel.loadCategoryByIndex(portfolioCarousel.currentCategoryIndex + 1);
+                            } else {
+                                youtubePlayer.nextVideo();
+                            }
+                        } else {
+                            if (playlistIndex === 0) {
+                                // First video of playlist, loop to previous category
+                                portfolioCarousel.loadCategoryByIndex(portfolioCarousel.currentCategoryIndex - 1);
+                            } else {
+                                youtubePlayer.previousVideo();
+                            }
+                        }
+                    } catch (e) {
+                        // Fallback for unexpected playlist errors: loop categories
+                        const newIndex = isNext 
+                            ? portfolioCarousel.currentCategoryIndex + 1 
+                            : portfolioCarousel.currentCategoryIndex - 1;
+                        portfolioCarousel.loadCategoryByIndex(newIndex);
                     }
-                });
+                }
+            };
+
+            // Previous Video Handler
+            if (prevBtn && !prevBtn.hasAttribute('data-listener-added')) {
+                prevBtn.addEventListener('click', () => handleVideoNavigation(false));
                 prevBtn.setAttribute('data-listener-added', 'true');
             }
             
+            // Next Video Handler
             if (nextBtn && !nextBtn.hasAttribute('data-listener-added')) {
-                nextBtn.addEventListener('click', () => {
-                    if (youtubePlayer && youtubePlayer.nextVideo && !isLoading) {
-                        youtubePlayer.nextVideo();
-                    }
-                });
+                nextBtn.addEventListener('click', () => handleVideoNavigation(true));
                 nextBtn.setAttribute('data-listener-added', 'true');
             }
             
-            // Initial button state update
             updateNavigationButtons();
         }
 
+        // MODIFIED FUNCTION: Includes video count display AND manages button state based on playlist end/start
         function updateNavigationButtons() {
             const prevBtn = document.getElementById('prev-video');
             const nextBtn = document.getElementById('next-video');
-            if (!prevBtn || !nextBtn || !youtubePlayer) return;
+            const statusElement = document.getElementById('current-video-status');
             
+            if (!prevBtn || !nextBtn || !youtubePlayer || !statusElement) return;
+            
+            statusElement.textContent = ''; 
+            
+            // Buttons are always enabled for category looping
+            prevBtn.disabled = false;
+            nextBtn.disabled = false;
+            prevBtn.style.opacity = '1';
+            nextBtn.style.opacity = '1';
+
+
             try {
                 if (currentPlaylist && youtubePlayer.getPlaylist && youtubePlayer.getPlaylistIndex) {
                     const playlist = youtubePlayer.getPlaylist();
                     if (playlist && playlist.length > 1) {
                         const playlistIndex = youtubePlayer.getPlaylistIndex();
-                        prevBtn.disabled = playlistIndex <= 0;
-                        nextBtn.disabled = playlistIndex >= playlist.length - 1;
+                        const currentVideoNumber = playlistIndex + 1;
+                        const totalVideos = playlist.length;
+                        
+                        statusElement.textContent = `Video ${currentVideoNumber} of ${totalVideos}`;
+                        
+                        // Fading out buttons at the start/end of the current *playlist* to hint at the change
+                        if (playlistIndex === 0) {
+                            prevBtn.style.opacity = '0.5'; 
+                        } 
+                        if (playlistIndex === totalVideos - 1) {
+                            nextBtn.style.opacity = '0.5'; 
+                        } 
                         return;
                     }
                 }
             } catch (error) {
-                console.log('Playlist info not available yet');
+                console.log('Playlist info not yet fully available (expected during initialization).');
             }
             
-            // Default state for single videos or when playlist info isn't available
-            prevBtn.disabled = true;
-            nextBtn.disabled = true;
-        }
+            // Default state for single videos (Showreel or failed load)
+            statusElement.textContent = (currentPlaylistTitle === 'Showreel' || currentPlaylist === null) 
+                ? 'Single Highlight Video' 
+                : '1 of 1 Video (Playlist Loading)';
 
+            // For single videos (Showreel), fade buttons slightly to suggest moving categories
+            prevBtn.style.opacity = '0.7';
+            nextBtn.style.opacity = '0.7';
+        }
     </script>
 </body>
 </html>
-        
